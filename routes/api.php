@@ -9,4 +9,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
     Route::post('logout', 'Auth\LoginController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
+
+    //ROTAS DE PRODUTOS
+    Route::get('products', 'Product\ProductController@index');
 });
