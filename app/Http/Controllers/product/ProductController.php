@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\product;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use Illuminate\Http\Request;
 use App\Repositories\ProductRepository;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -38,9 +40,18 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(ProductRequest $request)
     {
-        //
+        try{
+            DB::beginTransaction();
+            $product = $this->productsRepository->create($request->validated());
+            DB::commit();
+            return response()->json($product,200);
+        }catch(\Exception $e){
+            DB::rollBack();
+            \Log::alert($e->getMessage());
+            return response()->json($e->getMessage(),400);
+        }
     }
 
     /**

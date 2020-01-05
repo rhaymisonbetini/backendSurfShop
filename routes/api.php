@@ -12,4 +12,5 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
 
     //ROTAS DE PRODUTOS
     Route::get('products', 'Product\ProductController@index');
+    Route::post('/product/create', 'Product\ProductController@create');
 });
