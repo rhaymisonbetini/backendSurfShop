@@ -17,8 +17,8 @@ class ProductRepository
 
         $product['name'] = $request['name'] ?? false;
         $product['description'] = $request['description'] ?? false;
-        $product['picture'] = (float) $request['picture'] ?? false;
-        $product['price'] = $request['price'] ?? false;
+        $product['picture'] = $request['picture'] ?? false;
+        $product['price'] = (float) $request['price'] ?? false;
         $product['user_id'] = $request['user_id'] ?? false;
 
         return Products::create($product);
